@@ -124,7 +124,7 @@ export function MatchdayHero({
           <div className="flex flex-col items-center text-center">
             <div className="relative flex size-24 items-center justify-center rounded-2xl border border-white/20 bg-white p-3 shadow-2xl backdrop-blur-md transition-transform duration-300 hover:scale-105 sm:size-28 md:size-32">
               <Image
-                src="/crest.png"
+                src="/solid_crest.png"
                 alt="Inter Pomar"
                 width={84}
                 height={96}
