@@ -49,7 +49,7 @@ export function Navbar() {
     <header className="sticky top-0 z-50 border-b border-line bg-night/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/crest.png" alt="" width={30} height={35} />
+          <Image src="/clear_crest.png" alt="" width={30} height={35} />
           <span className="font-display text-lg font-semibold uppercase tracking-[0.08em] text-chalk">
             Inter Pomar
           </span>

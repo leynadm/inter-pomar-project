@@ -97,7 +97,7 @@ export default async function ClubPage({
         </div>
 
         <div className="mt-14 flex items-center gap-6 border-t border-line pt-10">
-          <Image src="/crest.png" alt="" width={72} height={84} />
+          <Image src="/clear_crest.png" alt="" width={72} height={84} />
           <p className="max-w-sm font-mono text-xs leading-relaxed text-chalk-faint">
             {locale === "ca"
               ? "L'escut recull les franges verticals de la samarreta i l'any de fundació."

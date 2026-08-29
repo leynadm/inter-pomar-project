@@ -51,7 +51,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         {/* Brand */}
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/crest.png" alt="" width={30} height={35} />
+          <Image src="/clear_crest.png" alt="" width={30} height={35} />
           <span className="display text-lg text-pitch">Inter Pomar</span>
         </Link>
 
@@ -116,7 +116,7 @@ export function SiteHeader() {
             <SheetTitle className="sr-only">Inter Pomar</SheetTitle>
 
             <div className="mt-8 flex items-center gap-3 px-4">
-              <Image src="/crest.png" alt="" width={28} height={33} />
+              <Image src="/clear_crest.png" alt="" width={28} height={33} />
               <span className="display text-base text-pitch">Inter Pomar</span>
             </div>
 

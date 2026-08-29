@@ -111,7 +111,7 @@ function Footer({ locale }: { locale: string }) {
           <div>
             <div className="flex items-center gap-3">
               <Image
-                src="/crest.png"
+                src="/clear_crest.png"
                 alt=""
                 width={32}
                 height={37}
