@@ -1,0 +1,14 @@
+{
+  "title": "Matches",
+  "subtitle": "All fixtures and results for the current season.",
+  "upcoming": "Upcoming fixtures",
+  "noResults": "No matches played yet this season.",
+  "noUpcoming": "No upcoming fixtures.",
+  "results": "Results",
+  "scored": "Goals scored",
+  "conceded": "Goals conceded",
+  "meta": {
+    "title": "Matches — Inter Pomar",
+    "description": "Schedule and results for Inter Pomar."
+  }
+}

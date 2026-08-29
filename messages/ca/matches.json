@@ -1,0 +1,14 @@
+{
+  "title": "Partits",
+  "subtitle": "Tots els partits i resultats de la temporada actual.",
+  "upcoming": "Propers partits",
+  "results": "Resultats",
+  "noResults": "Encara no s'ha jugat cap partit aquesta temporada.",
+  "noUpcoming": "No hi ha partits programats.",
+  "scored": "Gols a favor",
+  "conceded": "Gols en contra",
+  "meta": {
+    "title": "Partits — Inter Pomar",
+    "description": "Calendari i resultats de l'Inter Pomar."
+  }
+}

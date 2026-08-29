@@ -1,0 +1,256 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Inter Pomar — Design System Tokens (Tailwind v4)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme inline {
+  /* ── Brand Green ────────────────────────────────────────────────────── */
+  --color-green-50: #f0f9f2;
+  --color-green-100: #d4eed9;
+  --color-green-200: #a8ddb3;
+  --color-green-300: #6dc47f;
+  --color-green-400: #3da854;
+  --color-green-500: #1B6B33;
+  --color-green-600: #155a29;
+  --color-green-700: #104820;
+  --color-green-800: #0b3618;
+  --color-green-900: #072510;
+
+  /* ── Warm Neutrals ─────────────────────────────────────────────────── */
+  --color-neutral-50: #FAFAF8;
+  --color-neutral-100: #F5F5F0;
+  --color-neutral-200: #E8E8E2;
+  --color-neutral-300: #D4D4CC;
+  --color-neutral-400: #A3A39A;
+  --color-neutral-500: #737369;
+  --color-neutral-600: #52524A;
+  --color-neutral-700: #3A3A34;
+  --color-neutral-800: #252521;
+  --color-neutral-900: #141412;
+
+  /* ── Sand Accent ───────────────────────────────────────────────────── */
+  --color-sand-50: #FDFCF7;
+  --color-sand-100: #F8F5EA;
+  --color-sand-200: #EFE9D0;
+  --color-sand-300: #E2D9B2;
+  --color-sand-400: #D4C88E;
+  --color-sand-500: #BFB06A;
+
+  /* ── Semantic aliases ──────────────────────────────────────────────── */
+  --color-pitch: #1B6B33;
+  --color-pitch-deep: #104820;
+  --color-paper: #FAFAF8;
+
+  /* ── Match results ─────────────────────────────────────────────────── */
+  --color-result-win: #1B6B33;
+  --color-result-draw: #D4A017;
+  --color-result-loss: #C53030;
+
+  /* ── Fonts ──────────────────────────────────────────────────────────── */
+  --font-display: var(--font-oswald), "Oswald", ui-sans-serif, sans-serif;
+  --font-body: var(--font-archivo), "Archivo", ui-sans-serif, sans-serif;
+  --font-editorial: var(--font-newsreader), "Newsreader", ui-serif, serif;
+  --font-sans: var(--font-archivo), "Archivo", ui-sans-serif, sans-serif;
+
+  /* ── Spacing ────────────────────────────────────────────────────────── */
+  --spacing-section: 80px;
+  --spacing-card: 24px;
+
+  /* ── Border radius ──────────────────────────────────────────────────── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* ── Shadows ────────────────────────────────────────────────────────── */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover: 0 2px 8px rgba(0, 0, 0, 0.06),
+    0 8px 24px rgba(0, 0, 0, 0.06);
+
+  /* ── Transitions ────────────────────────────────────────────────────── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+
+  /* ── shadcn semantic mappings ───────────────────────────────────────── */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+/* ── Root variables (design-system palette → shadcn tokens) ──────────── */
+:root {
+  --background: #FAFAF8;
+  --foreground: #141412;
+  --card: #ffffff;
+  --card-foreground: #141412;
+  --popover: #ffffff;
+  --popover-foreground: #141412;
+  --primary: #1B6B33;
+  --primary-foreground: #ffffff;
+  --secondary: #F5F5F0;
+  --secondary-foreground: #252521;
+  --muted: #F5F5F0;
+  --muted-foreground: #737369;
+  --accent: #f0f9f2;
+  --accent-foreground: #1B6B33;
+  --destructive: #C53030;
+  --border: #E8E8E2;
+  --input: #E8E8E2;
+  --ring: #1B6B33;
+  --radius: 0.625rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Base Layer
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-paper text-neutral-900 font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Animations
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Stagger helper: apply delay-[n] alongside animate-fade-up */
+.delay-1 { animation-delay: 80ms; }
+.delay-2 { animation-delay: 160ms; }
+.delay-3 { animation-delay: 240ms; }
+.delay-4 { animation-delay: 320ms; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Utility Classes
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer utilities {
+  /* Display type — Oswald, always uppercase */
+  .display {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-weight: 600;
+  }
+
+  .display-hero {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.05;
+  }
+
+  /* Editorial — Newsreader italic for lede paragraphs */
+  .editorial {
+    font-family: var(--font-editorial);
+    font-style: italic;
+  }
+
+  /* Eyebrow / label — tiny uppercase meta text */
+  .label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+  }
+
+  /* Numeric — tabular figures in display font */
+  .numeric {
+    font-variant-numeric: tabular-nums;
+    font-family: var(--font-display);
+  }
+
+  /* Score display — extra large match scores */
+  .score-display {
+    font-family: var(--font-display);
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Decorative backgrounds ──────────────────────────────────────── */
+
+  /* Mown grass — faint striped overlay */
+  .mow {
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(27, 107, 51, 0.06) 0px,
+      rgba(27, 107, 51, 0.06) 24px,
+      rgba(27, 107, 51, 0.03) 24px,
+      rgba(27, 107, 51, 0.03) 48px
+    );
+  }
+
+  /* Softer version for light backgrounds */
+  .mow-soft {
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(27, 107, 51, 0.025) 0px,
+      rgba(27, 107, 51, 0.025) 24px,
+      transparent 24px,
+      transparent 48px
+    );
+  }
+
+  /* Duotone overlay for hero images */
+  .duotone {
+    background: linear-gradient(
+      to bottom,
+      rgba(16, 72, 32, 0.7),
+      rgba(11, 54, 24, 0.85)
+    );
+    mix-blend-mode: multiply;
+  }
+}

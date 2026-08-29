@@ -1,0 +1,14 @@
+{
+  "title": "Partidos",
+  "subtitle": "Todos los partidos y resultados de la temporada actual.",
+  "results": "Resultados",
+  "noResults": "Aún no se ha jugado ningún partido esta temporada.",
+  "noUpcoming": "No hay partidos programados.",
+  "upcoming": "Próximos partidos",
+  "scored": "Goles a favor",
+  "conceded": "Goles en contra",
+  "meta": {
+    "title": "Partidos — Inter Pomar",
+    "description": "Calendario y resultados del Inter Pomar."
+  }
+}

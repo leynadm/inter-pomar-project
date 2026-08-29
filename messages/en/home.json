@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "title": "Inter Pomar — Senior football in Badalona",
+    "description": "Official website of Inter Pomar. Results, squad, gallery and more."
+  },
+  "hero": {
+    "subtitle": "Senior league · Badalona",
+    "nextMatch": "Next match",
+    "home": "Home",
+    "away": "Away",
+    "matchday": "Matchday",
+    "kickoff": "Kick-off",
+    "live": "Kick-off",
+    "directions": "Get directions",
+    "noMatch": "No fixtures",
+    "noMatchBody": "There's nothing in the calendar yet. We'll be back soon."
+  },
+  "countdown": {
+    "days": "Days",
+    "hours": "Hrs",
+    "mins": "Min",
+    "secs": "Sec"
+  },
+  "matchCenter": {
+    "title": "Matches",
+    "all": "View all",
+    "fixtures": "Fixtures",
+    "results": "Results",
+    "video": "Video",
+    "noFixtures": "No fixtures scheduled yet.",
+    "noResults": "No matches played yet this season.",
+    "noVideo": "Match videos will appear here.",
+    "matchdayShort": "MD"
+  },
+  "outcome": {
+    "win": "Win",
+    "draw": "Draw",
+    "loss": "Loss"
+  },
+  "season": {
+    "title": "The season",
+    "played": "Played",
+    "record": "W-D-L",
+    "goalsFor": "Goals for",
+    "goalsAgainst": "Goals against",
+    "form": "Form",
+    "scorers": "Top scorers",
+    "goals": "Goals",
+    "noScorers": "No goals scored yet this season."
+  },
+  "squad": {
+    "title": "The squad",
+    "all": "View the squad"
+  },
+  "club": {
+    "lede": "We started in the Pomar neighbourhood in 2024. A green shirt, a group of friends, and the urge to keep playing every Sunday.",
+    "cta": "About the club"
+  },
+  "nextMatch": {
+    "title": "Next match",
+    "home": "Home",
+    "away": "Away",
+    "noUpcoming": "No upcoming matches"
+  },
+  "latestResult": {
+    "title": "Latest result"
+  }
+}

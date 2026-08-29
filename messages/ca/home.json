@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "title": "Inter Pomar — Futbol sènior a Badalona",
+    "description": "Lloc web oficial de l'Inter Pomar. Resultats, plantilla, galeria i més."
+  },
+  "hero": {
+    "subtitle": "Lliga sènior · Badalona",
+    "nextMatch": "Pròxim partit",
+    "home": "A casa",
+    "away": "A fora",
+    "matchday": "Jornada",
+    "kickoff": "Inici",
+    "live": "En joc",
+    "directions": "Com arribar",
+    "noMatch": "Sense partits",
+    "noMatchBody": "Encara no hi ha cap partit al calendari. Tornem aviat."
+  },
+  "countdown": {
+    "days": "Dies",
+    "hours": "Hores",
+    "mins": "Min",
+    "secs": "Seg"
+  },
+  "matchCenter": {
+    "title": "Partits",
+    "all": "Veure tots",
+    "fixtures": "Calendari",
+    "results": "Resultats",
+    "video": "Vídeo",
+    "noFixtures": "Encara no hi ha partits programats.",
+    "noResults": "Encara no hem jugat cap partit aquesta temporada.",
+    "noVideo": "Els vídeos dels partits apareixeran aquí.",
+    "matchdayShort": "J"
+  },
+  "outcome": {
+    "win": "Victòria",
+    "draw": "Empat",
+    "loss": "Derrota"
+  },
+  "season": {
+    "title": "La temporada",
+    "played": "Jugats",
+    "record": "V-E-D",
+    "goalsFor": "Gols a favor",
+    "goalsAgainst": "Gols en contra",
+    "form": "Forma",
+    "scorers": "Màxims golejadors",
+    "goals": "Gols",
+    "noScorers": "Encara no s'ha marcat cap gol aquesta temporada."
+  },
+  "squad": {
+    "title": "La plantilla",
+    "all": "Veure la plantilla"
+  },
+  "club": {
+    "lede": "Vam néixer al barri del Pomar el 2024. Una samarreta verda, un grup d'amics i les ganes de seguir jugant cada diumenge.",
+    "cta": "Sobre el club"
+  },
+  "nextMatch": {
+    "title": "Pròxim partit",
+    "home": "Casa",
+    "away": "Fora",
+    "noUpcoming": "No hi ha partits programats"
+  },
+  "latestResult": {
+    "title": "Últim resultat"
+  }
+}
