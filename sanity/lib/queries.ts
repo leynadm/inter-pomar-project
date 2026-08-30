@@ -132,7 +132,6 @@ export function calculateRecordFor(matches: RawMatch[]): Omit<SeasonTotals, "for
 
 // ─── Homepage Query ─────────────────────────────────────────────────────────
 
-
 function buildSeasonScope(matches: RawMatch[]) {
   const totals = {
     ...calculateRecordFor(matches),
@@ -212,15 +211,14 @@ function buildSeasonScope(matches: RawMatch[]) {
   };
 }
 
-// 2. In getHomepageData(), compute seasonData and return it:
-
 export async function getHomepageData() {
   const data = await client.fetch<{
     nextMatch: RawMatch | null;
     upcomingFixtures: RawMatch[];
     playedMatches: RawMatch[];
     squadPreview: RawPlayer[];
-  }>(`{
+  }>(
+    `{
     "nextMatch": *[_type == "match" && date > now()] | order(date asc)[0] {
       _id, date, season, competition, opponent, opponentCrest, homeOrAway,
       venue, venueMapUrl, matchday
@@ -251,7 +249,10 @@ export async function getHomepageData() {
         _id, name, nickname, "slug": slug.current, shirtNumber, photo,
         "position": primaryPosition
       }
-  }`);
+  }`,
+    {},
+    { next: { tags: ["sanity"] } }
+  );
 
   const played = data.playedMatches ?? [];
 
@@ -331,7 +332,7 @@ export async function getHomepageData() {
       }
       : undefined,
 
-    seasonData, // 👈 Returned here so page.tsx can access data.seasonData
+    seasonData,
 
     squadPreview: (data.squadPreview ?? []).map((p) => ({
       _id: p._id,
@@ -347,15 +348,14 @@ export async function getHomepageData() {
   };
 }
 
-
-
 // ─── Squad With Stats ───────────────────────────────────────────────────────
 
 export async function getSquadWithStats() {
   const data = await client.fetch<{
     players: RawPlayer[];
     playedMatches: RawMatch[];
-  }>(`{
+  }>(
+    `{
     "players": *[_type == "player"] | order(shirtNumber asc) {
       _id, name, nickname, "slug": slug.current, shirtNumber, photo,
       nationality, secondNationality, preferredFoot, strengths, status, "position": primaryPosition
@@ -371,7 +371,10 @@ export async function getSquadWithStats() {
         "playerId": player->_id
       }
     }
-  }`);
+  }`,
+    {},
+    { next: { tags: ["sanity"] } }
+  );
 
   const totals = new Map<
     string,
@@ -444,8 +447,8 @@ export async function getSquadWithStats() {
 // ─── Additional Queries ─────────────────────────────────────────────────────
 
 export async function getSquad() {
-  return client.fetch<RawPlayer[]>(`
-    *[_type == "player"] | order(shirtNumber asc) {
+  return client.fetch<RawPlayer[]>(
+    `*[_type == "player"] | order(shirtNumber asc) {
       _id,
       name,
       nickname,
@@ -460,13 +463,15 @@ export async function getSquad() {
       strengths,
       status,
       bio
-    }
-  `);
+    }`,
+    {},
+    { next: { tags: ["sanity"] } }
+  );
 }
 
 export async function getAllMatches() {
-  return client.fetch<RawMatch[]>(`
-    *[_type == "match"] | order(date desc) {
+  return client.fetch<RawMatch[]>(
+    `*[_type == "match"] | order(date desc) {
       _id,
       date,
       season,
@@ -490,8 +495,10 @@ export async function getAllMatches() {
         yellowCard,
         redCard
       }
-    }
-  `);
+    }`,
+    {},
+    { next: { tags: ["sanity"] } }
+  );
 }
 
 export async function getMatch(id: string) {
@@ -508,6 +515,7 @@ export async function getMatch(id: string) {
         redCard
       }
     }`,
-    { id }
+    { id },
+    { next: { tags: ["sanity"] } }
   );
 }

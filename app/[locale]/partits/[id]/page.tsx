@@ -219,7 +219,7 @@ export default async function MatchDetailPage({
             <div className="flex flex-col items-center text-center">
               <div className="relative flex size-24 items-center justify-center rounded-2xl border border-white/20 bg-white p-3 shadow-2xl backdrop-blur-md sm:size-28 md:size-32">
                 <Image
-                  src="/crest.png"
+                  src="/clear_crest.png"
                   alt="Inter Pomar"
                   width={84}
                   height={96}
@@ -290,7 +290,7 @@ export default async function MatchDetailPage({
                     alt={match.opponent}
                     width={84}
                     height={96}
-                    className="max-h-full max-w-full object-contain drop-shadow-md"
+                    className="max-h-full max-w-full rounded-lg object-contain drop-shadow-md"
                   />
                 ) : (
                   <div className="flex size-full items-center justify-center rounded-xl bg-neutral-900/40">

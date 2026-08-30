@@ -163,7 +163,7 @@ export function MatchdayHero({
                   alt={match.opponent}
                   width={84}
                   height={96}
-                  className="max-h-full max-w-full object-contain drop-shadow-md"
+                  className="max-h-full rounded-lg max-w-full object-contain drop-shadow-md"
                 />
               ) : (
                 <div className="flex size-full items-center justify-center rounded-xl bg-neutral-900/40">
