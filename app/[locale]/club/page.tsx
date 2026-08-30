@@ -4,7 +4,7 @@ const COPY = {
   ca: {
     eyebrow: "Badalona · Fundat el 2024",
     title: "El club",
-    lede: "Inter Pomar és un equip de veterans nascut al barri del Pomar. Juguem a la lliga sènior +30 i, sobretot, juguem cada diumenge.",
+    lede: "Inter Pomar és un equip de veterans nascut al barri del Pomar. Juguem a la lliga sènior +30 i, sobretot, juguem cada dissabte.",
     blocks: [
       {
         h: "Com vam començar",
@@ -23,7 +23,7 @@ const COPY = {
   es: {
     eyebrow: "Badalona · Fundado en 2024",
     title: "El club",
-    lede: "Inter Pomar es un equipo de veteranos nacido en el barrio de Pomar. Jugamos en la liga sénior +30 y, sobre todo, jugamos cada domingo.",
+    lede: "Inter Pomar es un equipo de veteranos nacido en el barrio de Pomar. Jugamos en la liga sénior +30 y, sobre todo, jugamos cada sabado.",
     blocks: [
       {
         h: "Cómo empezamos",
@@ -42,7 +42,7 @@ const COPY = {
   en: {
     eyebrow: "Badalona · Founded 2024",
     title: "The club",
-    lede: "Inter Pomar is a veterans' side from the Pomar neighbourhood of Badalona. We play in the over-30s senior league and, more to the point, we play every Sunday.",
+    lede: "Inter Pomar is a veterans' side from the Pomar neighbourhood of Badalona. We play in the over-30s senior league and, more to the point, we play every Saturday.",
     blocks: [
       {
         h: "How it started",

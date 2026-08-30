@@ -40,6 +40,7 @@
   "season": {
     "title": "The season",
     "played": "Played",
+    "assists": "Top assisters",
     "record": "W-D-L",
     "goalsFor": "Goals for",
     "goalsAgainst": "Goals against",
@@ -53,7 +54,7 @@
     "all": "View the squad"
   },
   "club": {
-    "lede": "We started in the Pomar neighbourhood in 2024. A green shirt, a group of friends, and the urge to keep playing every Sunday.",
+    "lede": "We started in the Pomar neighbourhood in 2024. A green shirt, a group of friends, and the urge to keep playing every Saturday.",
     "cta": "About the club"
   },
   "nextMatch": {

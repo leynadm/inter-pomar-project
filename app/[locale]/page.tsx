@@ -43,7 +43,6 @@ export default async function HomePage({
         }}
       />
 
-      {/* ── Match centre ────────────────────────────────────────────── */}
       <Section>
         <SectionHead
           title={t("matchCenter.title")}
@@ -69,14 +68,11 @@ export default async function HomePage({
           }}
         />
       </Section>
-
-      {/* ── Season ──────────────────────────────────────────────────── */}
       <div className="bg-neutral-100">
         <Section>
           <SectionHead title={t("season.title")} />
           <SeasonPanel
-            totals={data.seasonTotals}
-            scorers={data.topScorers ?? []}
+            data={data.seasonData}
             copy={{
               season: t("season.title"),
               played: t("season.played"),
@@ -85,14 +81,14 @@ export default async function HomePage({
               goalsAgainst: t("season.goalsAgainst"),
               form: t("season.form"),
               scorers: t("season.scorers"),
-              goals: t("season.goals"),
-              noScorers: t("season.noScorers"),
+              assists: t("season.assists"),
+              contributions: "Gols + Assistències (G+A)",
+              tableTitle: "Rendiment Individual",
             }}
           />
         </Section>
       </div>
 
-      {/* ── Squad ───────────────────────────────────────────────────── */}
       <Section>
         <SectionHead
           title={t("squad.title")}
@@ -123,6 +119,7 @@ export default async function HomePage({
           <p className="editorial mt-5 text-xl text-white/85 sm:text-2xl">
             {t("club.lede")}
           </p>
+
           <Link
             href="/club"
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-pitch transition-colors hover:bg-white/90"

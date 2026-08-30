@@ -223,8 +223,8 @@ function FixtureRow({
         )}
         <span
           className={`display shrink-0 rounded-full px-3 py-1 text-[11px] tracking-widest ${match.homeOrAway === "home"
-              ? "bg-pitch text-white"
-              : "bg-neutral-100 text-neutral-600"
+            ? "bg-pitch text-white"
+            : "bg-neutral-100 text-neutral-600"
             }`}
         >
           {match.homeOrAway === "home" ? homeLabel : awayLabel}
@@ -280,7 +280,7 @@ function ResultRow({
 
   return (
     <Link
-      href={{ pathname: "/partits/[id]", params: { id: match._id } }}
+      href={`/partits/${match._id}`}
       className="group flex items-start justify-between gap-4 px-5 py-4 transition-colors hover:bg-neutral-50 sm:px-6"
     >
       <div className="flex items-start gap-4">

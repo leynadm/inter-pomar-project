@@ -86,10 +86,6 @@ function Footer({ locale }: { locale: string }) {
       href: "/partits" as const,
       label: t({ ca: "Partits", es: "Partidos", en: "Matches" }),
     },
-    {
-      href: "/galeria" as const,
-      label: t({ ca: "Galeria", es: "Galería", en: "Gallery" }),
-    },
   ];
 
   const seasonLinks = [

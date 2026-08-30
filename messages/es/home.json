@@ -42,6 +42,7 @@
     "played": "Jugados",
     "record": "V-E-D",
     "goalsFor": "Goles a favor",
+    "assists": "Pases de gol",
     "goalsAgainst": "Goles en contra",
     "form": "Forma",
     "scorers": "Máximos goleadores",
@@ -53,7 +54,7 @@
     "all": "Ver la plantilla"
   },
   "club": {
-    "lede": "Nacimos en el barrio de Pomar en 2024. Una camiseta verde, un grupo de amigos y las ganas de seguir jugando cada domingo.",
+    "lede": "Nacimos en el barrio de Pomar en 2024. Una camiseta verde, un grupo de amigos y las ganas de seguir jugando cada sabado.",
     "cta": "Sobre el club"
   },
   "nextMatch": {

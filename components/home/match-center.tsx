@@ -2,7 +2,17 @@
 
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Play, Footprints, Calendar, History, Video } from "lucide-react";
+import { Link } from "@/app/i18n/navigation";
+import {
+  Play,
+  Footprints,
+  Calendar,
+  History,
+  Video,
+  ArrowRight,
+  MapPin,
+  Clock,
+} from "lucide-react";
 
 type Score = { home: number; away: number };
 
@@ -60,7 +70,8 @@ export function MatchCenter({
   const dl = locale === "ca" ? "ca-ES" : locale === "es" ? "es-ES" : "en-GB";
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-10 sm:space-y-12">
+
       {/* ── 2-Column Grid: Fixtures & Recent Results ── */}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
 
@@ -109,9 +120,9 @@ export function MatchCenter({
         </section>
       </div>
 
-      {/* ── 3. Latest Highlights Video (Rendered below if available) ── */}
+      {/* ── 3. Latest Highlights Video ── */}
       {latestVideo?.videoUrl && ytEmbed(latestVideo.videoUrl) && (
-        <section className="pt-4">
+        <section className="pt-2">
           <SectionSubHead
             title={copy.video}
             icon={<Video className="size-4 text-pitch" />}
@@ -131,12 +142,12 @@ export function MatchCenter({
               </div>
 
               {/* Video Match Details Sidebar */}
-              <div className="flex flex-col justify-between border-t border-neutral-100 p-6 lg:col-span-4 lg:border-t-0 lg:border-l">
+              <div className="flex flex-col justify-between border-t border-neutral-100 p-5 sm:p-6 lg:col-span-4 lg:border-t-0 lg:border-l">
                 <div>
                   <span className="label inline-block rounded-full bg-green-50 px-2.5 py-1 text-[10px] font-semibold text-pitch">
                     Highlights
                   </span>
-                  <h3 className="display mt-3 text-xl text-neutral-900">
+                  <h3 className="display mt-2.5 text-lg text-neutral-900 sm:text-xl">
                     <span className="text-neutral-400">
                       {latestVideo.homeOrAway === "home" ? "vs " : "@ "}
                     </span>
@@ -144,7 +155,7 @@ export function MatchCenter({
                   </h3>
                   <p className="label mt-1 text-neutral-400">
                     {new Date(latestVideo.date).toLocaleDateString(dl, {
-                      weekday: "long",
+                      weekday: "short",
                       day: "numeric",
                       month: "long",
                       year: "numeric",
@@ -153,7 +164,7 @@ export function MatchCenter({
                 </div>
 
                 {latestVideo.score && (
-                  <div className="mt-6 flex items-center justify-between border-t border-neutral-100 pt-4">
+                  <div className="mt-5 flex items-center justify-between border-t border-neutral-100 pt-4 sm:mt-6">
                     <span className="label text-neutral-500">Resultat</span>
                     <span className="score-display text-2xl font-bold text-pitch">
                       {latestVideo.homeOrAway === "home"
@@ -171,7 +182,7 @@ export function MatchCenter({
   );
 }
 
-/* ── Section Sub-Heading (Design System Section 4i) ───────────────────── */
+/* ── Section Sub-Heading ─────────────────────────────────────────────── */
 
 function SectionSubHead({
   title,
@@ -195,13 +206,13 @@ function SectionSubHead({
 
 function Panel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="h-full overflow-hidden rounded-2xl border border-neutral-200/70 bg-white shadow-card">
+    <div className="h-full overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-card">
       {children}
     </div>
   );
 }
 
-/* ── Fixture Row ─────────────────────────────────────────────────────── */
+/* ── Fixture Row (Mobile-Optimized) ──────────────────────────────────── */
 
 function FixtureRow({ match, dl }: { match: Match; dl: string }) {
   const d = new Date(match.date);
@@ -212,50 +223,69 @@ function FixtureRow({ match, dl }: { match: Match; dl: string }) {
     .replace(".", "");
 
   return (
-    <div className="flex items-center justify-between gap-3 px-5 py-4 transition-colors duration-fast hover:bg-neutral-50/80 sm:px-6">
-      <div className="flex items-center gap-3.5">
+    <Link
+      href={`/partits/${match._id}`}
+      className="group flex items-center justify-between gap-3 px-4 py-4 transition-colors duration-fast hover:bg-neutral-50/80 sm:px-6 sm:py-4.5"
+    >
+      <div className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4">
+
         {/* Date block */}
-        <div className="w-11 shrink-0 text-center">
-          <p className="display text-[10px] font-semibold text-neutral-400">
+        <div className="flex w-10 shrink-0 flex-col items-center justify-center rounded-xl bg-neutral-50 p-1 text-center sm:w-11 sm:p-1.5 border border-neutral-100">
+          <span className="display text-[9px] font-bold text-neutral-400 sm:text-[10px]">
             {monthShort}
-          </p>
-          <p className="score-display text-xl font-bold leading-none text-neutral-800">
+          </span>
+          <span className="score-display text-lg font-bold leading-none text-neutral-900 sm:text-xl">
             {d.getDate()}
-          </p>
+          </span>
         </div>
 
-        <div className="h-8 w-px bg-neutral-200" aria-hidden />
-
+        {/* Crest */}
         <Crest src={match.opponentCrestUrl} name={match.opponent} />
 
-        <div className="min-w-0">
-          <p className="truncate text-sm font-semibold text-neutral-900">
-            {isHome
-              ? `Inter Pomar vs ${match.opponent}`
-              : `${match.opponent} vs Inter Pomar`}
+        {/* Team Names & Metadata */}
+        <div className="min-w-0 flex-1">
+          <p className="display text-sm font-bold text-neutral-900 transition-colors group-hover:text-pitch sm:text-base line-clamp-2 leading-snug">
+            <span className="text-neutral-400 font-normal">
+              {isHome ? "vs " : "@ "}
+            </span>
+            {match.opponent}
           </p>
-          <p className="mt-0.5 truncate text-xs text-neutral-500">
-            <span className="capitalize">{d.toLocaleDateString(dl, { weekday: "short" })}</span>
-            {" · "}
-            {d.toLocaleTimeString(dl, { hour: "2-digit", minute: "2-digit" })}h
-            {match.venue ? ` · ${match.venue}` : ""}
-          </p>
+
+          <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-neutral-500">
+            <span className="inline-flex items-center gap-1 capitalize">
+              <Clock className="size-3 text-neutral-400" />
+              {d.toLocaleTimeString(dl, { hour: "2-digit", minute: "2-digit" })}h
+            </span>
+
+            {match.venue && (
+              <span className="inline-flex items-center gap-1 truncate">
+                <MapPin className="size-3 text-neutral-400" />
+                <span className="truncate max-w-[120px] sm:max-w-[200px]">
+                  {match.venue}
+                </span>
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
-      <span
-        className={`display shrink-0 rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-wider ${isHome
+      {/* Home/Away Pill & Action */}
+      <div className="flex shrink-0 items-center gap-2">
+        <span
+          className={`display rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-wider sm:px-3 sm:py-1 sm:text-[11px] ${isHome
             ? "bg-pitch text-white"
             : "bg-neutral-100 text-neutral-600"
-          }`}
-      >
-        {isHome ? "CASA" : "FORA"}
-      </span>
-    </div>
+            }`}
+        >
+          {isHome ? "CASA" : "FORA"}
+        </span>
+        <ArrowRight className="size-3.5 text-neutral-300 transition-transform group-hover:translate-x-0.5 group-hover:text-pitch hidden sm:block" />
+      </div>
+    </Link>
   );
 }
 
-/* ── Result Row ──────────────────────────────────────────────────────── */
+/* ── Result Row (Mobile-Optimized) ───────────────────────────────────── */
 
 function ResultRow({
   match,
@@ -285,14 +315,19 @@ function ResultRow({
     o === "W" ? copy.win : o === "D" ? copy.draw : copy.loss;
 
   return (
-    <div className="flex items-start justify-between gap-3 px-5 py-4 transition-colors duration-fast hover:bg-neutral-50/80 sm:px-6">
-      <div className="flex items-start gap-3.5">
+    <Link
+      href={`/partits/${match._id}`}
+      className="group flex items-center justify-between gap-3 px-4 py-4 transition-colors duration-fast hover:bg-neutral-50/80 sm:px-6 sm:py-4.5"
+    >
+      <div className="flex min-w-0 flex-1 items-start gap-3 sm:gap-4">
+        {/* Crest */}
         <Crest src={match.opponentCrestUrl} name={match.opponent} />
 
-        <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-2">
-            <p className="truncate text-sm font-semibold text-neutral-900">
-              <span className="text-neutral-400">
+        {/* Details */}
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+            <p className="display text-sm font-bold text-neutral-900 transition-colors group-hover:text-pitch sm:text-base line-clamp-2 leading-snug">
+              <span className="text-neutral-400 font-normal">
                 {isHome ? "vs " : "@ "}
               </span>
               {match.opponent}
@@ -304,7 +339,7 @@ function ResultRow({
             </span>
           </div>
 
-          <p className="mt-0.5 text-xs text-neutral-500">
+          <p className="mt-1 text-[11px] text-neutral-400 sm:text-xs">
             {new Date(match.date).toLocaleDateString(dl, {
               day: "numeric",
               month: "short",
@@ -317,10 +352,10 @@ function ResultRow({
             <div className="mt-1.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-neutral-600">
               <Footprints className="size-3 shrink-0 text-pitch" aria-hidden />
               {match.scorers.map((s) => (
-                <span key={s.name} className="inline-flex items-center">
+                <span key={s.name} className="inline-flex items-center text-[11px] sm:text-xs">
                   {s.name}
                   {s.goals > 1 && (
-                    <span className="numeric ml-0.5 font-semibold text-pitch">
+                    <span className="numeric ml-0.5 font-bold text-pitch">
                       ×{s.goals}
                     </span>
                   )}
@@ -331,27 +366,31 @@ function ResultRow({
         </div>
       </div>
 
-      <p
-        className={`score-display shrink-0 text-xl font-bold sm:text-2xl ${o === "W" ? "text-pitch" : "text-neutral-700"
-          }`}
-      >
-        {line}
-      </p>
-    </div>
+      {/* Score Display & Arrow */}
+      <div className="flex shrink-0 items-center gap-2 sm:gap-3 pl-2">
+        <p
+          className={`score-display text-lg font-bold sm:text-2xl ${o === "W" ? "text-pitch" : "text-neutral-700"
+            }`}
+        >
+          {line}
+        </p>
+        <ArrowRight className="size-3.5 text-neutral-300 transition-transform group-hover:translate-x-0.5 group-hover:text-pitch" />
+      </div>
+    </Link>
   );
 }
 
-/* ── Crest ───────────────────────────────────────────────────────────── */
+/* ── Club Crest Badge ────────────────────────────────────────────────── */
 
 function Crest({ src, name }: { src?: string; name: string }) {
   if (src) {
     return (
-      <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-neutral-100 bg-neutral-50 p-1">
+      <div className="flex size-9 sm:size-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-neutral-100 bg-neutral-50 p-1">
         <Image
           src={src}
           alt={name}
-          width={32}
-          height={32}
+          width={36}
+          height={36}
           className="max-h-full max-w-full object-contain"
         />
       </div>
@@ -360,7 +399,7 @@ function Crest({ src, name }: { src?: string; name: string }) {
   return (
     <div
       aria-hidden
-      className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-100 text-xs font-bold text-neutral-500"
+      className="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-100 text-xs font-bold text-neutral-500"
     >
       {name.charAt(0)}
     </div>
@@ -372,7 +411,11 @@ function Crest({ src, name }: { src?: string; name: string }) {
 function Empty({ text, icon }: { text: string; icon?: React.ReactNode }) {
   return (
     <div className="flex flex-col items-center gap-2 px-6 py-12 text-center">
-      {icon && <span className="text-neutral-300">{icon}</span>}
+      {icon && (
+        <span className="flex size-10 items-center justify-center rounded-full bg-neutral-100">
+          {icon}
+        </span>
+      )}
       <p className="max-w-xs text-xs text-neutral-400">{text}</p>
     </div>
   );

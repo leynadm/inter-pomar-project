@@ -35,7 +35,6 @@ export function SiteHeader() {
     { href: "/" as const, label: t("home") },
     { href: "/plantilla" as const, label: t("squad") },
     { href: "/partits" as const, label: t("matches") },
-    { href: "/galeria" as const, label: t("gallery") },
   ];
 
   function switchLocale(next: string) {

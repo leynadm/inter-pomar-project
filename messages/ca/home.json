@@ -42,6 +42,7 @@
     "played": "Jugats",
     "record": "V-E-D",
     "goalsFor": "Gols a favor",
+    "assists": "Máximos asistentes",
     "goalsAgainst": "Gols en contra",
     "form": "Forma",
     "scorers": "Màxims golejadors",
@@ -53,7 +54,7 @@
     "all": "Veure la plantilla"
   },
   "club": {
-    "lede": "Vam néixer al barri del Pomar el 2024. Una samarreta verda, un grup d'amics i les ganes de seguir jugant cada diumenge.",
+    "lede": "Vam néixer al barri del Pomar el 2024. Una samarreta verda, un grup d'amics i les ganes de seguir jugant cada dissabte.",
     "cta": "Sobre el club"
   },
   "nextMatch": {

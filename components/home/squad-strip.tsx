@@ -69,10 +69,7 @@ export function SquadStrip({ players }: { players: Player[] }) {
               className="w-38 shrink-0 sm:w-44 lg:w-48"
             >
               <Link
-                href={{
-                  pathname: "/plantilla/[slug]",
-                  params: { slug: p.slug },
-                }}
+                href={`/plantilla/${p.slug}`}
                 className="group block focus-visible:outline-none"
               >
                 <article className="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-card transition-all duration-normal ease-out group-hover:-translate-y-1 group-hover:border-pitch/30 group-hover:shadow-card-hover group-focus-visible:ring-2 group-focus-visible:ring-pitch">

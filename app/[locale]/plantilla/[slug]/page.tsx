@@ -6,7 +6,6 @@ import {
   FileText,
   User,
   Shield,
-  Footprints,
   Sparkles,
 } from "lucide-react";
 
@@ -17,6 +16,39 @@ import {
   getFlagUrl,
   strengths as allStrengths,
 } from "@/lib/football-constants";
+
+/* ── Localized Position Code Translator ─────────────────────────────── */
+
+function posShort(code: string, locale: string): string {
+  if (!code) return "";
+  const c = code.toUpperCase();
+  const loc = locale === "ca" ? "ca" : locale === "es" ? "es" : "en";
+
+  const map: Record<string, { ca: string; es: string; en: string }> = {
+    GK: { ca: "POR", es: "POR", en: "GK" },
+    POR: { ca: "POR", es: "POR", en: "GK" },
+    CB: { ca: "DFC", es: "DFC", en: "CB" },
+    DFC: { ca: "DFC", es: "DFC", en: "CB" },
+    LB: { ca: "LE", es: "LI", en: "LB" },
+    RB: { ca: "LD", es: "LD", en: "RB" },
+    CDM: { ca: "MCD", es: "MCD", en: "CDM" },
+    CM: { ca: "MC", es: "MC", en: "CM" },
+    CAM: { ca: "MCO", es: "MCO", en: "CAM" },
+    LM: { ca: "ME", es: "MI", en: "LM" },
+    RM: { ca: "MD", es: "MD", en: "RM" },
+    LW: { ca: "EE", es: "EI", en: "LW" },
+    LWF: { ca: "EE", es: "EI", en: "LWF" },
+    RW: { ca: "ED", es: "ED", en: "RW" },
+    RWF: { ca: "ED", es: "ED", en: "RWF" },
+    CF: { ca: "DC", es: "DC", en: "CF" },
+    ST: { ca: "DC", es: "DC", en: "ST" },
+    DEF: { ca: "DEF", es: "DEF", en: "DEF" },
+    MID: { ca: "MIG", es: "MED", en: "MID" },
+    FWD: { ca: "DAV", es: "DEL", en: "FWD" },
+  };
+
+  return map[c]?.[loc] || code;
+}
 
 /* ── Data fetching ──────────────────────────────────────────────────── */
 
@@ -120,6 +152,7 @@ export default async function PlayerPage({
   const tPos = await getTranslations("positions");
   const tStats = await getTranslations("stats");
   const tFoot = await getTranslations("foot");
+  const tStrengths = await getTranslations("strengths");
 
   const { given, family } = splitName(player.nickname || player.name);
   const secondFlag = player.secondNationality
@@ -175,6 +208,8 @@ export default async function PlayerPage({
           : "Preferred foot",
     starts:
       locale === "ca" ? "titular" : locale === "es" ? "titular" : "starts",
+    primary:
+      locale === "ca" ? "Principal" : locale === "es" ? "Principal" : "Primary",
     discipline:
       locale === "ca"
         ? "Targetes"
@@ -197,14 +232,13 @@ export default async function PlayerPage({
   return (
     <main className="min-h-screen bg-paper">
       {/* ═════════════════════════════════════════════════════════════════
-         1. Hero Header — Clear fixed header with pt-24 sm:pt-28
+         1. Hero Header
          ═════════════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden bg-linear-to-br from-pitch via-green-800 to-pitch-deep pt-24 text-white sm:pt-28">
-        {/* Striped mowing turf overlay */}
         <div className="mow absolute inset-0 opacity-40" aria-hidden />
 
         <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
-          {/* Back to squad breadcrumb button */}
+          {/* Back breadcrumb */}
           <Link
             href="/plantilla"
             className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-neutral-950/30 px-3.5 py-1.5 text-xs text-white/85 shadow-sm backdrop-blur-sm transition-all duration-fast hover:border-sand-300 hover:bg-white/15 hover:text-white"
@@ -213,33 +247,33 @@ export default async function PlayerPage({
             <span className="label text-[11px] font-semibold">{labels.back}</span>
           </Link>
 
-          {/* Profile Identity Details */}
+          {/* Profile Identity */}
           <div className="mt-6 flex flex-col items-center gap-6 pb-8 sm:flex-row sm:items-end sm:gap-8 sm:pb-10">
-            {/* Framed Photo Medallion (Crisp 112px–144px frame) */}
-            <div className="relative flex size-28 shrink-0 items-center justify-center overflow-hidden rounded-3xl border-3 border-white/25 bg-white/10 p-1 shadow-2xl backdrop-blur-md sm:size-36 lg:size-40">
+            {/* Circular Photo Frame */}
+            <div className="relative flex size-28 shrink-0 items-center justify-center overflow-hidden rounded-full border-3 border-white bg-black shadow-md ring-1 ring-neutral-200/60 sm:size-36 lg:size-40">
               {player.photo ? (
                 <Image
-                  src={urlFor(player.photo).width(300).height(300).fit("crop").url()}
+                  src={urlFor(player.photo).width(320).height(320).url()}
                   alt={player.name}
                   width={160}
                   height={160}
                   priority
-                  className="size-full rounded-[20px] object-cover object-top"
+                  className="size-full object-contain object-top"
                 />
               ) : (
-                <div className="flex size-full items-center justify-center rounded-[20px] bg-white/10 text-white/50">
+                <div className="flex size-full items-center justify-center bg-green-50 text-pitch">
                   {player.shirtNumber != null ? (
                     <span className="score-display text-4xl font-bold">
                       {player.shirtNumber}
                     </span>
                   ) : (
-                    <User className="size-14 text-white/40" />
+                    <User className="size-14 text-neutral-400" />
                   )}
                 </div>
               )}
             </div>
 
-            {/* Name, Position & Badges */}
+            {/* Identity Details */}
             <div className="flex-1 text-center sm:text-left">
               <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-start">
                 {player.shirtNumber != null && (
@@ -278,6 +312,7 @@ export default async function PlayerPage({
                 {family}
               </h1>
 
+              {/* Localized position tag in Hero */}
               <div className="mt-2 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
                 <span className="display rounded-full bg-sand-400/20 px-3 py-1 text-xs font-semibold tracking-wider text-sand-200 border border-sand-400/30">
                   {tPos(player.primaryPosition)}
@@ -292,7 +327,7 @@ export default async function PlayerPage({
           </div>
         </div>
 
-        {/* ── High-Contrast Stats Banner (Bottom of Hero) ───────────── */}
+        {/* High-Contrast Stats Banner */}
         <div className="border-t border-white/15 bg-neutral-950/60 backdrop-blur-md">
           <div className="mx-auto grid max-w-6xl grid-cols-2 divide-x divide-white/10 sm:grid-cols-4">
             <StatHero
@@ -321,32 +356,36 @@ export default async function PlayerPage({
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════
-         2. Content Grid — Main Content & Technical Profile Sidebar
+         2. Content Grid
          ═════════════════════════════════════════════════════════════════ */}
       <div className="mx-auto max-w-6xl px-5 py-10 sm:px-8 sm:py-14">
         <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
 
-          {/* ── Main Column ─────────────────────────────────────────── */}
+          {/* ── Main Column ── */}
           <div className="space-y-8">
-            {/* Demarcacions / Positions */}
+
+            {/* Demarcacions / Positions with Localized Codes (e.g. DC · Davanter centre) */}
             <ContentCard title={labels.positions} icon={<Shield className="size-4 text-pitch" />}>
               <div className="flex flex-wrap gap-2.5">
+                {/* Primary Position Badge */}
                 <span className="display inline-flex items-center gap-2 rounded-full bg-pitch px-4 py-1.5 text-xs font-semibold tracking-wider text-white shadow-xs">
                   <span className="size-1.5 rounded-full bg-white" />
-                  {player.primaryPosition} · {tPos(player.primaryPosition)} (Principal)
+                  {posShort(player.primaryPosition, locale)} · {tPos(player.primaryPosition)} ({labels.primary})
                 </span>
+
+                {/* Secondary Positions Badges */}
                 {player.secondaryPositions?.map((pos: string) => (
                   <span
                     key={pos}
                     className="display inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3.5 py-1.5 text-xs font-semibold tracking-wider text-neutral-700"
                   >
-                    {pos} · {tPos(pos)}
+                    {posShort(pos, locale)} · {tPos(pos)}
                   </span>
                 ))}
               </div>
             </ContentCard>
 
-            {/* Strengths Tags (§4h) */}
+            {/* Strengths Tags with Translations */}
             {player.strengths?.length > 0 && (
               <ContentCard title={labels.strengths} icon={<Sparkles className="size-4 text-pitch" />}>
                 <div className="flex flex-wrap gap-2.5">
@@ -355,13 +394,18 @@ export default async function PlayerPage({
                     if (!s) return null;
                     const style =
                       STRENGTH_STYLES[s.category] ?? STRENGTH_STYLES.mental;
+
+                    const translatedTitle = tStrengths.has(slug)
+                      ? tStrengths(slug)
+                      : s.title;
+
                     return (
                       <span
                         key={slug}
                         className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold ${style.bg} ${style.text} shadow-2xs`}
                       >
                         <span className={`size-2 rounded-full ${style.dot}`} />
-                        {s.title}
+                        {translatedTitle}
                       </span>
                     );
                   })}
@@ -379,7 +423,7 @@ export default async function PlayerPage({
             )}
           </div>
 
-          {/* ── Sidebar: Fitxa Tècnica ───────────────────────────────── */}
+          {/* ── Sidebar: Fitxa Tècnica ── */}
           <aside className="space-y-6">
             <div className="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-card">
               <div className="border-b border-neutral-100 bg-neutral-50/70 px-5 py-3.5">
@@ -390,7 +434,7 @@ export default async function PlayerPage({
               <dl className="divide-y divide-neutral-100 text-sm">
                 <ProfileRow
                   label={labels.positions}
-                  value={`${player.primaryPosition} · ${tPos(player.primaryPosition)}`}
+                  value={`${posShort(player.primaryPosition, locale)} · ${tPos(player.primaryPosition)}`}
                 />
                 {player.preferredFoot && (
                   <ProfileRow

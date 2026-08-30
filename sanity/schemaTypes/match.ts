@@ -24,6 +24,41 @@ export const match = defineType({
       group: "info",
       validation: (rule) => rule.required(),
     }),
+
+    defineField({
+      name: "season",
+      title: "Season",
+      description: "e.g. 2025/26, 2026/27",
+      type: "string",
+      group: "info",
+      options: {
+        list: [
+          { title: "2024/25", value: "2024-2025" },
+          { title: "2025/26", value: "2025-2026" },
+          { title: "2026/27", value: "2026-2027" },
+        ],
+      },
+      initialValue: "2025-2026",
+      validation: (rule) => rule.required(),
+    }),
+
+    defineField({
+      name: "competition",
+      title: "Competition",
+      type: "string",
+      group: "info",
+      options: {
+        list: [
+          { title: "Lliga Sènior Badalona (League)", value: "league" },
+          { title: "Partit Amistós (Friendly)", value: "friendly" },
+          { title: "Copa (Cup)", value: "cup" },
+          { title: "Torneig (Tournament)", value: "tournament" },
+        ],
+      },
+      initialValue: "league",
+      validation: (rule) => rule.required(),
+    }),
+
     defineField({
       name: "opponent",
       title: "Opponent",
@@ -31,12 +66,14 @@ export const match = defineType({
       group: "info",
       validation: (rule) => rule.required(),
     }),
+
     defineField({
       name: "opponentCrest",
       title: "Opponent Crest",
       type: "image",
       group: "info",
     }),
+
     defineField({
       name: "homeOrAway",
       title: "Home / Away",
@@ -51,26 +88,29 @@ export const match = defineType({
       },
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: "competition",
-      title: "Competition",
-      type: "string",
-      group: "info",
-      initialValue: "Lliga Sènior Badalona",
-    }),
+
     defineField({
       name: "venue",
       title: "Venue",
       type: "string",
       group: "info",
     }),
+
     defineField({
       name: "matchday",
       title: "Matchday / Jornada",
       type: "number",
       group: "info",
-      description: "Week number in the league (e.g. Jornada 5)",
-      validation: (rule) => rule.min(1),
+      description: "Only applicable for League matches",
+      hidden: ({ parent }) => parent?.competition !== "league",
+      validation: (rule) =>
+        rule.custom((val, context) => {
+          const parent = context.parent as { competition?: string };
+          if (parent?.competition === "league" && (!val || val < 1)) {
+            return "Matchday is required for league matches";
+          }
+          return true;
+        }),
     }),
 
     // ── Result & Stats ───────────────────────────────────────────────────
@@ -95,6 +135,7 @@ export const match = defineType({
         }),
       ],
     }),
+
     defineField({
       name: "formation",
       title: "Formation Used",
@@ -102,6 +143,7 @@ export const match = defineType({
       group: "result",
       description: "e.g. 4-3-3, 4-4-2, 3-5-2",
     }),
+
     defineField({
       name: "appearances",
       title: "Appearances",
@@ -124,7 +166,7 @@ export const match = defineType({
               name: "positionsPlayed",
               title: "Positions Played",
               type: "array",
-              description: "All positions they played in this match (in order)",
+              description: "All positions played in order",
               of: [
                 {
                   type: "string",
@@ -173,7 +215,7 @@ export const match = defineType({
               goals: "goals",
               assists: "assists",
               started: "started",
-              positionPlayed: "positionPlayed",
+              positionsPlayed: "positionsPlayed",
               media: "player.photo",
             },
             prepare({
@@ -202,6 +244,7 @@ export const match = defineType({
         },
       ],
     }),
+
     defineField({
       name: "notes",
       title: "Match Notes",
@@ -249,17 +292,27 @@ export const match = defineType({
       date: "date",
       opponent: "opponent",
       homeOrAway: "homeOrAway",
+      competition: "competition",
+      season: "season",
       scoreHome: "score.home",
       scoreAway: "score.away",
       matchday: "matchday",
       media: "opponentCrest",
     },
-    prepare({ date, opponent, homeOrAway, scoreHome, scoreAway, matchday, media }) {
+    prepare({
+      date,
+      opponent,
+      homeOrAway,
+      competition,
+      scoreHome,
+      scoreAway,
+      matchday,
+      media,
+    }) {
       const formattedDate = date
         ? new Date(date).toLocaleDateString("ca-ES", {
           day: "numeric",
           month: "short",
-          year: "numeric",
         })
         : "TBD";
 
@@ -275,12 +328,18 @@ export const match = defineType({
           : `${scoreAway} - ${scoreHome}`
         : "Upcoming";
 
-      const prefix = homeOrAway === "home" ? "vs" : "@";
-      const jornada = matchday ? `J${matchday} · ` : "";
+      const compTag =
+        competition === "friendly"
+          ? "🤝 Amistós"
+          : competition === "cup"
+            ? "🏆 Copa"
+            : matchday
+              ? `J${matchday}`
+              : "Lliga";
 
       return {
-        title: `${prefix} ${opponent} — ${scoreText}`,
-        subtitle: `${jornada}${formattedDate}`,
+        title: `${homeOrAway === "home" ? "vs" : "@"} ${opponent} (${scoreText})`,
+        subtitle: `${compTag} · ${formattedDate}`,
         media,
       };
     },
