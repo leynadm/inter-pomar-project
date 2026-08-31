@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { getHomepageData } from "@/sanity/lib/queries";
+import { getHomepageData, getLatestArticles } from "@/sanity/lib/queries";
 import { Link } from "../i18n/navigation";
 import { MatchdayHero } from "@/components/home/matchday-hero";
 import { MatchCenter } from "@/components/home/match-center";
 import { SeasonPanel } from "@/components/home/season-panel";
 import { SquadStrip } from "@/components/home/squad-strip";
 import { ArrowRight } from "lucide-react";
+import { LatestArticles } from "@/components/articles/latest-articles";
 
 const HERO_IMAGE: string | null = null;
 const CLUB_IMAGE: string | null = null;
@@ -19,7 +20,7 @@ export default async function HomePage({
   const { locale } = await params;
   const t = await getTranslations("home");
   const data = await getHomepageData();
-
+  const articles = await getLatestArticles(3); // from queries.ts
   return (
     <main>
       <MatchdayHero
@@ -129,6 +130,14 @@ export default async function HomePage({
           </Link>
         </div>
       </section>
+      <Section>
+        <SectionHead
+          title={t("news.title") ?? "Notícies"}
+          href="/noticies"
+          cta={t("news.all") ?? "Veure totes"}
+        />
+        <LatestArticles articles={articles} locale={locale} />
+      </Section>
     </main>
   );
 }
@@ -149,7 +158,7 @@ function SectionHead({
   cta,
 }: {
   title: string;
-  href?: "/partits" | "/plantilla" | "/galeria";
+  href?: "/partits" | "/plantilla" | "/noticies" | "/club" | string; // 👈 Added "/noticies"
   cta?: string;
 }) {
   return (

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Inter Pomar — Senior football in Badalona",
+    "title": "Inter Pomar | Senior football in Badalona",
     "description": "Official website of Inter Pomar. Results, squad, gallery and more."
   },
   "hero": {
@@ -65,5 +65,9 @@
   },
   "latestResult": {
     "title": "Latest result"
+  },
+  "news": {
+    "title": "News",
+    "all": "See All"
   }
 }

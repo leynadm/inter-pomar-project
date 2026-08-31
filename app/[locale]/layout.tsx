@@ -57,7 +57,7 @@ export default async function LocaleLayout({
       lang={locale}
       className={`${archivo.variable} ${newsreader.variable} ${oswald.variable}`}
     >
-      <body className="min-h-svh font-sans antialiased">
+      <body className="min-h-svh font-sans antialiased bg-paper">
         <NextIntlClientProvider>
           <SiteHeader />
           {children}
@@ -86,6 +86,10 @@ function Footer({ locale }: { locale: string }) {
       href: "/partits" as const,
       label: t({ ca: "Partits", es: "Partidos", en: "Matches" }),
     },
+    {
+      href: "/noticies" as const,
+      label: t({ ca: "Notícies", es: "Noticias", en: "News" }),
+    },
   ];
 
   const seasonLinks = [
@@ -105,17 +109,22 @@ function Footer({ locale }: { locale: string }) {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand column */}
           <div>
-            <div className="flex items-center gap-3">
-              <Image
-                src="/clear_crest.png"
-                alt=""
-                width={32}
-                height={37}
-                className="brightness-150"
-              />
-              <span className="display text-base text-white">Inter Pomar</span>
+            <div className="flex  items-center gap-3">
+              <div className="bg-white rounded-md p-1">
+                <Image
+                  src="/clear_crest.png"
+                  alt="Inter Pomar"
+                  width={32}
+                  height={37}
+                  className="brightness-150 object-contain"
+                />
+              </div>
+
+              <span className="display text-base font-bold text-white uppercase tracking-wider">
+                Inter Pomar
+              </span>
             </div>
-            <p className="mt-3 text-[13px] leading-relaxed text-neutral-400">
+            <p className="mt-3 text-[13px] leading-relaxed text-neutral-400 whitespace-pre-line">
               {t({
                 ca: "Club de futbol amateur de Badalona.\nFundat el 2024. Lliga de veterans +30.",
                 es: "Club de fútbol amateur de Badalona.\nFundado en 2024. Liga de veteranos +30.",
@@ -126,7 +135,7 @@ function Footer({ locale }: { locale: string }) {
 
           {/* Club links */}
           <nav>
-            <p className="display text-xs tracking-widest text-neutral-500">
+            <p className="display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
               Club
             </p>
             <ul className="mt-3 space-y-2">
@@ -145,7 +154,7 @@ function Footer({ locale }: { locale: string }) {
 
           {/* Season links */}
           <nav>
-            <p className="display text-xs tracking-widest text-neutral-500">
+            <p className="display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
               {t({
                 ca: "Temporada",
                 es: "Temporada",
@@ -168,7 +177,7 @@ function Footer({ locale }: { locale: string }) {
 
           {/* Location */}
           <div>
-            <p className="display text-xs tracking-widest text-neutral-500">
+            <p className="display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
               {t({ ca: "Ubicació", es: "Ubicación", en: "Location" })}
             </p>
             <p className="mt-3 text-[13px] text-neutral-300">
@@ -177,7 +186,7 @@ function Footer({ locale }: { locale: string }) {
           </div>
         </div>
 
-        <div className="mt-10 flex items-center justify-between border-t border-neutral-700 pt-6">
+        <div className="mt-10 flex items-center justify-between border-t border-neutral-800 pt-6">
           <p className="text-xs text-neutral-500">
             © 2024–{new Date().getFullYear()} Inter Pomar CF
           </p>

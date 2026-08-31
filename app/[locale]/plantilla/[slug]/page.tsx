@@ -7,6 +7,8 @@ import {
   User,
   Shield,
   Sparkles,
+  BicepsFlexed,
+  Check,
 } from "lucide-react";
 
 import { Link } from "@/app/i18n/navigation";
@@ -93,49 +95,6 @@ function splitName(name: string) {
   if (parts.length === 1) return { given: "", family: parts[0] };
   return { given: parts[0], family: parts.slice(1).join(" ") };
 }
-
-/* ── Strength tag color mapping (Design System §4h) ─────────────────── */
-
-const STRENGTH_STYLES: Record<
-  string,
-  { bg: string; dot: string; text: string }
-> = {
-  physical: {
-    bg: "bg-sand-100",
-    dot: "bg-result-draw",
-    text: "text-[#9A7D1A]",
-  },
-  defending: {
-    bg: "bg-blue-50",
-    dot: "bg-blue-600",
-    text: "text-blue-600",
-  },
-  passing: {
-    bg: "bg-green-50",
-    dot: "bg-pitch",
-    text: "text-pitch",
-  },
-  dribbling: {
-    bg: "bg-green-50",
-    dot: "bg-pitch",
-    text: "text-pitch",
-  },
-  shooting: {
-    bg: "bg-red-50",
-    dot: "bg-red-600",
-    text: "text-red-600",
-  },
-  goalkeeping: {
-    bg: "bg-sand-100",
-    dot: "bg-result-draw",
-    text: "text-[#9A7D1A]",
-  },
-  mental: {
-    bg: "bg-blue-50",
-    dot: "bg-blue-600",
-    text: "text-blue-600",
-  },
-};
 
 /* ── Page ───────────────────────────────────────────────────────────── */
 
@@ -364,7 +323,7 @@ export default async function PlayerPage({
           {/* ── Main Column ── */}
           <div className="space-y-8">
 
-            {/* Demarcacions / Positions with Localized Codes (e.g. DC · Davanter centre) */}
+            {/* Demarcacions / Positions */}
             <ContentCard title={labels.positions} icon={<Shield className="size-4 text-pitch" />}>
               <div className="flex flex-wrap gap-2.5">
                 {/* Primary Position Badge */}
@@ -385,15 +344,13 @@ export default async function PlayerPage({
               </div>
             </ContentCard>
 
-            {/* Strengths Tags with Translations */}
+            {/* Strengths Tags with Positive Green Checkmarks (No confusing red tags) */}
             {player.strengths?.length > 0 && (
-              <ContentCard title={labels.strengths} icon={<Sparkles className="size-4 text-pitch" />}>
+              <ContentCard title={labels.strengths} icon={<BicepsFlexed className="size-4 text-pitch" />}>
                 <div className="flex flex-wrap gap-2.5">
                   {player.strengths.map((slug: string) => {
                     const s = strengthMap[slug];
                     if (!s) return null;
-                    const style =
-                      STRENGTH_STYLES[s.category] ?? STRENGTH_STYLES.mental;
 
                     const translatedTitle = tStrengths.has(slug)
                       ? tStrengths(slug)
@@ -402,9 +359,9 @@ export default async function PlayerPage({
                     return (
                       <span
                         key={slug}
-                        className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold ${style.bg} ${style.text} shadow-2xs`}
+                        className="inline-flex items-center gap-2 rounded-full border border-green-200/80 bg-green-50 px-3.5 py-1.5 text-xs font-semibold text-pitch shadow-2xs"
                       >
-                        <span className={`size-2 rounded-full ${style.dot}`} />
+                        <Check className="size-3.5 shrink-0 stroke-[2.5] text-pitch" aria-hidden />
                         {translatedTitle}
                       </span>
                     );

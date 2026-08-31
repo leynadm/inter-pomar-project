@@ -519,3 +519,27 @@ export async function getMatch(id: string) {
     { next: { tags: ["sanity"] } }
   );
 }
+export async function getLatestArticles(limit = 3) {
+  return client.fetch(
+    `*[_type == "article"] | order(publishedAt desc)[0...$limit] {
+      _id,
+      title,
+      "slug": slug.current,
+      coverImage,
+      publishedAt,
+      relatedMatch-> {
+        _id,
+        "slug": slug.current,
+        date,
+        competition,
+        matchday,
+        homeOrAway,
+        venue,
+        opponent,
+        opponentCrest, // 👈 ADD THIS LINE
+        score
+      }
+    }`,
+    { limit },
+  );
+}
